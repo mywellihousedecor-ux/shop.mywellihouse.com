@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>My Welli House Holiday Shop</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Libre+Caslon+Text:wght@400;700&family=Figtree:wght@500;600;700&display=swap">
+<style>
+/* Layout: the brand kit's embossed paper as the masthead, then sections that each open on a paper-textured band in the palette; products sit as cutouts on warm stone */
+@font-face{font-family:"HV Fitzgerald";src:url(fonts-fitzgerald-regular.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"HV Fitzgerald";src:url(fonts-fitzgerald-italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"HV Fitzgerald";src:url(fonts-fitzgerald-bold.woff2) format("woff2");font-weight:700;font-style:normal;font-display:swap}
+:root{
+  --oxblood:#3b0510; --espresso:#221516; --cocoa:#221516; --olive:#463e28; --moss:#66642a;
+  --stone:#d9cdb9; --cream:#f4f4f1; --grey:#abada9; --ink:#221516; --muted:#6e5f5a;
+  --display:"HV Fitzgerald","Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --name:"HV Fitzgerald","Libre Caslon Text",Georgia,serif;
+  --label:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--stone);color:var(--ink);font:400 15px/1.5 var(--name)}
+img{max-width:100%;display:block}
+a{color:inherit}
+a:focus-visible{outline:2px solid var(--oxblood);outline-offset:3px}
+.in{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* Paper: the kit's embossed background, top edge only (no logo), turned into a neutral texture over each color */
+.tex{position:relative;isolation:isolate}
+.tex::before{content:"";position:absolute;inset:0;z-index:-1;background:url(img-paper.webp) left top/1600px auto repeat;filter:grayscale(1) brightness(2.5) contrast(2.6);mix-blend-mode:overlay;opacity:.6;pointer-events:none}
+
+/* Masthead: the kit's paper texture with the pressed logo cropped out, so the white logo shows once, centered */
+.mast{position:relative;color:var(--cream);text-align:center;padding-top:env(safe-area-inset-top,0px);background:#33301d}
+.mast{isolation:isolate}
+.mast::before{content:"";position:absolute;inset:0;z-index:-1;background:url(img-paper.webp) center top/1600px auto repeat}
+.mast .in{display:flex;flex-direction:column;align-items:center;gap:clamp(16px,2.4vw,24px);padding-block:clamp(40px,6vw,72px) clamp(32px,4.5vw,52px)}
+.mast .logo{width:min(460px,80vw);display:block;margin-inline:auto}
+.mast .rule{width:56px;height:1px;background:rgba(244,244,241,.55)}
+.hookwrap{display:flex;flex-direction:column;align-items:center;gap:10px}
+.hook{margin:0;font:italic 400 clamp(22px,4vw,46px)/1.1 var(--display);max-width:none;white-space:nowrap;text-wrap:balance;color:#efe8d8;text-shadow:0 1px 0 rgba(0,0,0,.35)}
+.sub{margin:0;font:400 clamp(13.5px,1.3vw,16px)/1.45 var(--name);color:rgba(239,232,216,.82);max-width:46ch;text-wrap:balance}
+.sub:empty{display:none}
+nav.cats{background-color:var(--espresso);position:sticky;top:0;z-index:5;padding-top:env(safe-area-inset-top,0px)}
+nav.cats .in{display:flex;gap:6px;justify-content:center;flex-wrap:nowrap;padding-block:12px;overflow-x:auto;scrollbar-width:none}
+nav.cats a{flex:none;font:700 11px/1 var(--label);letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:#fff;background:var(--moss);border-radius:999px;padding:11px 16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 2px 6px rgba(0,0,0,.35);transition:background .2s,transform .2s}
+nav.cats a:hover{background:var(--oxblood);transform:translateY(-1px)}
+
+/* Sections */
+section{scroll-margin-top:56px}
+.band{color:var(--cream);text-align:center}
+.band .in{padding-block:clamp(28px,4.6vw,50px);display:flex;flex-direction:column;align-items:center;gap:10px}
+.persona{margin:0;font:italic 400 clamp(15px,1.6vw,19px)/1.35 var(--name);color:rgba(244,244,241,.88);max-width:44ch;text-wrap:balance}
+.band.oxblood{background-color:var(--oxblood)} .band.olive{background-color:var(--olive)} .band.moss{background-color:var(--moss)} .band.cocoa{background-color:var(--cocoa)} .band.espresso{background-color:var(--espresso)}
+.more{display:flex;justify-content:center;padding-bottom:clamp(36px,5vw,60px);margin-top:calc(-1 * clamp(14px,3vw,36px))}
+.more a{font:700 11px/1 var(--label);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;color:#fff;background:var(--espresso);padding:12px 18px;border-radius:999px}
+.more a:hover{background:var(--oxblood)}
+h2{font:400 clamp(24px,3.8vw,38px)/1.1 var(--display);letter-spacing:.16em;text-transform:uppercase;margin:0;text-wrap:balance;padding-left:.2em}
+.grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(18px,3vw,40px) clamp(14px,2.4vw,34px);padding-block:clamp(28px,4.5vw,52px) clamp(44px,6vw,76px)}
+.grid.three{grid-template-columns:repeat(3,minmax(0,1fr));max-width:900px;margin:0 auto}
+.grid.two{grid-template-columns:repeat(2,minmax(0,1fr));max-width:620px;margin:0 auto}
+.p{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;text-decoration:none;min-width:0}
+.ph{position:relative;width:100%;max-width:100%;aspect-ratio:3/4;flex:none;background:var(--stone)}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:4%;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.p:hover .ph img{transform:translateY(-4px) scale(1.025)}
+.badge{position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);background:var(--espresso);color:var(--cream);font:600 10.5px/1 var(--label);letter-spacing:.14em;text-transform:uppercase;padding:9px 12px;white-space:nowrap;box-shadow:0 3px 8px rgba(34,21,22,.3)}
+.badge.ox{background:var(--oxblood)} .badge.olive{background:var(--olive)} .badge.moss{background:var(--moss)}
+.brand{font:600 11px/1 var(--label);letter-spacing:.18em;text-transform:uppercase;margin-top:12px}
+.nm{font:400 clamp(14.5px,1.35vw,17px)/1.3 var(--name);max-width:22ch;text-wrap:balance}
+.shop{font:600 10.5px/1 var(--label);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid currentColor;padding-bottom:3px;transition:color .2s}
+.p:hover .shop{color:var(--oxblood)}
+
+/* Outfits: flatlays with small stars on each piece */
+.looks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2.6vw,34px);padding-block:clamp(30px,4.5vw,52px) clamp(44px,6vw,72px)}
+.look{display:flex;flex-direction:column;gap:12px;min-width:0}
+.fl{position:relative;width:100%;aspect-ratio:805/1000;box-shadow:0 10px 30px rgba(34,21,22,.16)}
+.fl>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.star{position:absolute;transform:translate(-50%,-50%);width:26px;height:26px;border:0;padding:0;background:none;cursor:pointer;z-index:2;display:grid;place-items:center}
+.star svg{width:16px;height:16px;fill:#fffaf0;stroke:var(--espresso);stroke-width:1.4;filter:drop-shadow(0 1px 2px rgba(0,0,0,.45));transition:transform .2s,fill .2s}
+.star:hover svg,.star:focus-visible svg,.star[aria-expanded="true"] svg{transform:scale(1.3);fill:#d9b46a}
+.star:focus-visible{outline:none}
+.tip{position:absolute;z-index:3;transform:translate(-50%,calc(-100% - 16px));background:var(--cream);color:var(--ink);padding:9px 11px;min-width:150px;max-width:210px;box-shadow:0 8px 24px rgba(0,0,0,.28);display:flex;flex-direction:column;gap:3px;text-align:left}
+.tip[hidden]{display:none}
+.tip b{font:400 14px/1.25 var(--name)}
+.tip a{font:700 10px/1 var(--label);letter-spacing:.14em;text-transform:uppercase;color:var(--oxblood);margin-top:3px}
+.tip em{font:600 11px/1.3 var(--label);font-style:normal;color:var(--muted)}
+.lk{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.lk a{margin-top:6px}
+.lk .occ{font:italic 400 clamp(20px,2vw,25px)/1.2 var(--display)}
+.lk .scn{font:400 14.5px/1.4 var(--name);color:var(--muted);max-width:32ch;text-wrap:balance}
+.lk a{font:700 11px/1 var(--label);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;color:#fff;background:var(--espresso);padding:11px 16px;border-radius:999px}
+.lk a:hover{background:var(--oxblood)}
+@media (max-width:860px){.looks{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:16px;scrollbar-width:none}.looks::-webkit-scrollbar{display:none}.look{flex:0 0 78%;scroll-snap-align:center}}
+
+/* Rows that scroll sideways, with arrows */
+.row{position:relative;padding-block:clamp(26px,4vw,44px) clamp(18px,3vw,30px)}
+.track{background:var(--stone);isolation:isolate;display:flex;gap:clamp(16px,2.2vw,30px);overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;padding:4px 2px 14px}
+.track::-webkit-scrollbar{display:none}
+.track .p{flex:0 0 clamp(150px,19%,230px);scroll-snap-align:start}
+.arw{position:absolute;top:calc(50% - 30px);transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:0;background:var(--espresso);color:#fff;font:400 22px/44px var(--label);cursor:pointer;z-index:4;box-shadow:0 4px 14px rgba(0,0,0,.25);transition:background .2s,opacity .2s}
+.arw:hover{background:var(--oxblood)} .arw:disabled{opacity:.25;cursor:default}
+.arw.prev{left:max(4px,env(safe-area-inset-left,0px))} .arw.next{right:max(4px,env(safe-area-inset-right,0px))}
+.row .in{position:relative}
+@media (max-width:640px){.track .p{flex-basis:44%}.arw{width:36px;height:36px;font-size:18px;line-height:36px}}
+.lk .t{font:400 clamp(17px,1.8vw,21px)/1.25 var(--display);min-width:0}
+.lk a{font:700 11px/1 var(--label);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;color:#fff;background:var(--espresso);padding:11px 14px;border-radius:999px;white-space:nowrap}
+.lk a:hover{background:var(--oxblood)}
+
+
+/* Story-style pieces: poll sticker, link stickers, text overlay */
+.poll .in{padding-block:clamp(26px,4vw,40px) 6px;display:flex;justify-content:center}
+.pollcard{background:#fff;border-radius:22px;box-shadow:0 10px 30px rgba(34,21,22,.18);padding:18px 18px 16px;width:min(520px,100%);text-align:center;display:flex;flex-direction:column;gap:12px}
+.pq{margin:0;font:700 clamp(17px,2vw,20px)/1.25 var(--label);color:#111}
+.po{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.po a{display:block;padding:12px 10px;border-radius:12px;background:#f1efed;color:#111;text-decoration:none;font:600 14px/1.2 var(--label);transition:background .15s,color .15s}
+.po a:hover,.po a:focus-visible{background:var(--oxblood);color:#fff;outline:none}
+.stk{display:inline-flex;align-items:center;gap:8px;background:#fff;color:#2f6fd6;border-radius:12px;padding:10px 16px;text-decoration:none;font:700 13.5px/1 var(--label);letter-spacing:.02em;box-shadow:0 6px 18px rgba(34,21,22,.16);transition:transform .15s}
+.stk svg{width:17px;height:17px;fill:currentColor;flex:none}
+.stk:hover{transform:translateY(-1px) scale(1.02)}
+.lk a.stk{background:#fff;color:#2f6fd6;letter-spacing:.02em;padding:10px 16px;border-radius:12px}
+.more a.stk{background:#fff;color:#2f6fd6;border-radius:12px;padding:11px 18px;letter-spacing:.02em}
+.ovl{position:absolute;z-index:2;left:50%;top:6%;transform:translateX(-50%) rotate(-2deg);background:#fff;color:#111;font:600 12.5px/1.25 var(--label);padding:6px 10px;border-radius:7px;white-space:nowrap;box-shadow:0 3px 10px rgba(0,0,0,.12);max-width:96%;overflow:hidden;text-overflow:ellipsis}
+.tap{display:inline-block;margin-top:4px;background:#fff;color:#111;font:600 12.5px/1 var(--label);padding:8px 12px;border-radius:999px}
+@media (max-width:640px){.ovl{font-size:11px;padding:5px 8px;white-space:normal;text-align:center;width:max-content;max-width:92%}}
+
+/* Lace labels: paper-lace edge drawn as a 9-slice SVG (img-lace.svg) */
+nav.cats a,.stk,.more a.stk,.lk a.stk{background:#faf6ee;background-clip:padding-box;border:22px solid transparent;border-image:url(img-lace.png) 70 round;border-radius:0;box-shadow:none;color:var(--espresso);font:700 11.5px/1 var(--label);letter-spacing:.16em;text-transform:uppercase;padding:6px 10px;filter:drop-shadow(0 3px 5px rgba(0,0,0,.28))}
+nav.cats a:hover,.stk:hover{background:#faf6ee;background-clip:padding-box;color:var(--oxblood);transform:translateY(-1px)}
+.stk svg{width:15px;height:15px}
+
+footer{background-color:var(--espresso);color:var(--cream);text-align:center;padding-bottom:env(safe-area-inset-bottom,0px)}
+footer .in{padding-block:40px 44px;display:flex;flex-direction:column;align-items:center;gap:14px}
+footer img{width:200px;opacity:.85}
+footer p{margin:0;font:500 12px/1.5 var(--label);letter-spacing:.04em;color:var(--grey);max-width:52ch}
+
+@media (max-width:1000px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}nav.cats .in{justify-content:flex-start}}
+@media (max-width:640px){.grid,.grid.three{grid-template-columns:repeat(2,minmax(0,1fr))}.badge{font-size:9.5px;padding:8px 9px;letter-spacing:.1em}}
+@media (prefers-reduced-motion:reduce){.ph img,nav.cats a,.shop{transition:none}.p:hover .ph img{transform:none}}
+
+/* SOLID TEST: approved palette only; hanger + brass hook on a solid #3b0510 millwork wall */
+.tex::before,.mast::before{display:none!important}
+:root{--stone:#f4f4f1;--cream:#f4f4f1;--oxblood:#3b0510;--espresso:#221516;--moss:#6c683d;--olive:#6c683d;--cocoa:#221516}
+.band.oxblood{background-color:#3b0510} .band.espresso,.band.cocoa{background-color:#221516} .band.olive,.band.moss{background-color:#6c683d}
+nav.cats,footer{background-color:#221516}
+.mast{background:#3b0510!important;overflow:hidden}
+.wall{position:absolute;inset:clamp(14px,2.4vw,28px) max(16px,6%) 0;pointer-events:none;box-shadow:inset 0 0 0 2px rgba(0,0,0,.30),inset 0 0 0 4px rgba(255,255,255,.055),inset 0 0 0 clamp(18px,3vw,34px) #3b0510,inset 0 0 0 calc(clamp(18px,3vw,34px) + 2px) rgba(0,0,0,.28),inset 0 0 0 calc(clamp(18px,3vw,34px) + 4px) rgba(255,255,255,.05);border-bottom:0}
+.hanger{position:relative;display:block;width:min(360px,62vw);margin:0 auto;filter:drop-shadow(0 18px 16px rgba(0,0,0,.45))}
+.mast .in{position:relative;padding-top:clamp(18px,2.6vw,30px)!important;padding-bottom:clamp(40px,5vw,64px)!important;gap:clamp(14px,2vw,22px)!important}
+.mast .logo{width:min(380px,74vw)}
+
+/* TITLES: regular caps + italic accent; SUBTITLES: always one line */
+h2 em{white-space:nowrap;font-style:italic;text-transform:none;letter-spacing:.01em;font-size:1.18em;line-height:1;padding-left:.08em}
+.persona{white-space:nowrap;max-width:none!important;text-wrap:nowrap;font-family:var(--display)!important;font-size:clamp(13px,1.6vw,19px)}
+
+/* EDITORIAL TEST: photo hero + handwritten note + chapter numbers */
+@font-face{font-family:"Suite Home";src:url(fonts-suitehome.woff2) format("woff2");font-display:swap}
+.mast.hero{background:#3b0510 url(img-hero.webp) 64% center/cover no-repeat!important;min-height:clamp(560px,82vh,780px);display:flex;align-items:center}
+.mast.hero::after{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(90deg,rgba(34,21,22,.72) 0%,rgba(34,21,22,.45) 38%,rgba(34,21,22,0) 62%)}
+.mast.hero .in{position:relative;z-index:1;width:100%;max-width:1180px;margin-inline:auto;align-items:flex-start;text-align:left;padding-block:clamp(48px,7vw,90px)!important;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px));gap:clamp(14px,2vw,22px)!important}
+.mast.hero .logo{width:min(400px,72vw);margin:0}
+.mast.hero .hook{white-space:normal;max-width:17ch;font-size:clamp(34px,5.2vw,64px);line-height:1.02}
+.note{margin-top:clamp(6px,1.4vw,14px);display:flex;flex-direction:column;gap:2px;font:italic 400 clamp(15px,1.5vw,19px)/1.4 var(--display);color:rgba(244,244,241,.9)}
+.note p{margin:0}
+.note .sig{font:400 clamp(30px,3.4vw,42px)/1.1 "Suite Home","Pinyon Script",cursive;color:#e6c98f;margin-top:8px;transform:rotate(-3deg);transform-origin:left}
+@media (max-width:700px){
+ .mast.hero{min-height:100svh;max-height:880px;background-position:68% center!important;align-items:flex-end}
+ .mast.hero::after{background:linear-gradient(180deg,rgba(34,21,22,.55) 0%,rgba(34,21,22,0) 22%,rgba(34,21,22,0) 38%,rgba(34,21,22,.78) 68%,rgba(34,21,22,.92) 100%)}
+ .mast.hero .in{align-items:flex-start;text-align:left;padding-top:0!important;padding-bottom:clamp(40px,10vw,64px)!important}
+ .mast.hero .logo{width:min(300px,70vw)}
+ .mast.hero .hook{max-width:none;font-size:clamp(30px,8.8vw,44px)}
+ .note{font-size:15px}
+}
+.no{display:flex;align-items:center;gap:12px;font:600 10.5px/1 Figtree,system-ui,sans-serif;letter-spacing:.34em;text-transform:uppercase;color:#d8bd85;margin-bottom:2px}
+.no::before,.no::after{content:"";width:clamp(22px,4vw,44px);height:1px;background:currentColor;opacity:.7}
+
+/* ===== EDITORIAL v2 ===== */
+h2{white-space:nowrap}
+@media (max-width:700px){h2{letter-spacing:.1em}}
+.track .p{flex-basis:clamp(180px,22%,270px)}
+@media (max-width:640px){.track .p{flex-basis:58%}}
+.ph img{transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.p:hover .ph img{transform:scale(1.045)}
+/* photo breaks */
+.brk{position:relative;height:clamp(300px,42vw,560px);background:#221516 center/cover no-repeat;display:flex;align-items:flex-end;justify-content:center;overflow:hidden}
+.brk::before{content:"";position:absolute;inset:0;background:inherit;background-size:cover;transform:scale(1.08);transition:transform 6s ease-out}
+.brk.on::before{transform:scale(1)}
+.brk::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(34,21,22,0) 40%,rgba(34,21,22,.72) 100%)}
+.brk p{position:relative;z-index:1;margin:0 0 clamp(28px,4vw,52px);padding-inline:16px;font:italic 400 clamp(24px,3.6vw,46px)/1.1 var(--display);color:#f4f4f1;text-align:center;white-space:nowrap;text-shadow:0 1px 18px rgba(0,0,0,.35)}
+/* price tabs */
+.price{background:#221516;border-top:1px solid rgba(244,244,241,.08)}
+.price .in{display:flex;align-items:center;justify-content:center;gap:10px;padding-block:12px;overflow-x:auto;scrollbar-width:none}
+.price .in::-webkit-scrollbar{display:none}
+.price .lbl{font:italic 400 15px/1 var(--display);color:rgba(244,244,241,.75);white-space:nowrap;margin-right:4px}
+.price button{all:unset;cursor:pointer;white-space:nowrap;font:600 10.5px/1 Figtree,system-ui,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:#f4f4f1;padding:9px 14px;border:1px solid rgba(216,189,133,.45);transition:background .25s,color .25s}
+.price button[aria-pressed="true"],.price button:hover{background:#d8bd85;color:#221516;border-color:#d8bd85}
+@media (max-width:640px){.price .in{justify-content:flex-start}}
+/* feed */
+.feed .tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,1.8vw,22px);max-width:900px;margin-inline:auto}
+.feed a{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;background:#221516}
+.feed img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.feed a:hover img{transform:scale(1.05)}
+.feed a::after{content:"";position:absolute;right:10px;top:10px;width:22px;height:22px;background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f4f4f1'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E");filter:drop-shadow(0 1px 3px rgba(0,0,0,.5))}
+.feed .row{padding-block:clamp(26px,4vw,48px)}
+/* sticky phone bar */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:50;display:none;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:rgba(34,21,22,.94);backdrop-filter:blur(8px);transform:translateY(110%);transition:transform .35s ease}
+.sticky a{display:block;text-align:center;padding:13px;background:#f4f4f1;color:#221516;font:600 11px/1 Figtree,system-ui,sans-serif;letter-spacing:.24em;text-transform:uppercase;text-decoration:none}
+.sticky.show{transform:none}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+.rv.on{opacity:1;transform:none}
+.hidep{display:none!important}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.brk::before{transform:none;transition:none}}
+
+/* SHOP THE LOOK (Shopbop style): photo + product column always the same height */
+.stl-track{gap:clamp(18px,2.4vw,32px)!important;align-items:flex-start}
+.stl-card{flex:0 0 clamp(320px,34%,500px);scroll-snap-align:start;display:grid;grid-template-columns:minmax(0,72fr) minmax(0,28fr);grid-template-rows:auto auto;column-gap:8px;row-gap:18px;min-width:0}
+.stl-card .ph2{grid-column:1;grid-row:1;aspect-ratio:2/3;overflow:hidden;background:#e9e6e2}
+.stl-card .ph2 img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.stl-card:hover .ph2 img{transform:scale(1.03)}
+.stl-card .ths{grid-column:2;grid-row:1;display:flex;flex-direction:column;gap:8px;min-width:0;min-height:0}
+.stl-card .th{flex:1 1 0;min-height:0;display:flex;align-items:center;justify-content:center;background:#ece8e4;overflow:hidden}
+.stl-card .th img{width:94%;height:94%;object-fit:contain;display:block;transition:transform .5s ease}
+.stl-card .th:hover img{transform:scale(1.06)}
+.stl-card .lk{grid-column:1 / -1;grid-row:2;display:flex;flex-direction:row;justify-content:center;align-items:center;padding:0;margin:0;gap:0}
+.stl-card .lk a{margin:0}
+@media (max-width:640px){.stl-card{flex-basis:88%}}
+
+/* edit layout */
+html[data-variant="edit"] .price{display:none}
+html[data-variant="edit"] .band .in{padding-block:clamp(20px,3.2vw,34px)}
+.more-links{display:flex;justify-content:center;padding:clamp(20px,3vw,36px) 16px;background:#f4f4f1}
+
+/* COVER v2: split, short, aspirational photo (her + Amazon boxes) */
+.mast.hero2{background:#221516!important;min-height:0!important;display:grid!important;grid-template-columns:minmax(0,40%) minmax(0,60%);align-items:stretch;padding-top:0}
+.mast.hero2::after{display:none!important}
+.mast.hero2 .hpic{grid-column:2;grid-row:1;background:#e9dfd2 url(img-hero2.webp) 55% center/cover no-repeat;min-height:clamp(420px,62vh,600px)}
+.mast.hero2 .in{grid-column:1;grid-row:1;align-self:center;max-width:none!important;margin:0!important;padding:clamp(36px,5vw,72px) clamp(24px,4vw,64px)!important;gap:clamp(12px,1.6vw,18px)!important;align-items:flex-start!important;text-align:left!important}
+.mast.hero2 .logo{width:min(320px,100%)!important}
+.mast.hero2 .hook{font-size:clamp(30px,3.6vw,50px)!important;max-width:14ch!important;white-space:normal!important}
+@media (max-width:700px){
+ .mast.hero2{grid-template-columns:1fr;min-height:0!important;max-height:none!important}
+ .mast.hero2 .hpic{grid-column:1;grid-row:1;min-height:0;aspect-ratio:1/1;background-image:url(img-hero2m.webp);background-position:center center}
+ .mast.hero2 .in{grid-column:1;grid-row:2;padding:22px 20px 26px!important;gap:10px!important}
+ .mast.hero2 .logo{width:min(230px,62vw)!important}
+ .mast.hero2 .hook{font-size:clamp(26px,7.4vw,34px)!important;max-width:none!important}
+ .mast.hero2 .note{font-size:14px}
+ .mast.hero2 .note .sig{font-size:28px;margin-top:4px}
+}
+
+/* COVER v3: compact text block */
+.mast.hero2 .in{gap:10px!important;padding:clamp(28px,3.4vw,52px) clamp(24px,3.6vw,56px)!important}
+.mast.hero2 .note{margin-top:0}
+.mast.hero2 .note .sig{margin-top:2px}
+@media (max-width:700px){
+ .mast.hero2 .in{padding:16px 20px 18px!important;gap:6px!important}
+ .mast.hero2 .logo{width:min(190px,52vw)!important}
+ .mast.hero2 .rule{display:none}
+ .mast.hero2 .hook{font-size:clamp(23px,6.4vw,28px)!important;line-height:1.1}
+ .mast.hero2 .note .sig{font-size:24px!important;margin-top:0}
+}
+</style>
+</head>
+<body>
+
+<header class="mast hero hero2">
+  <div class="hpic" role="img" aria-label="Paola on a stool with her laptop and a stack of Amazon boxes in a sunlit room"></div>
+  <div class="in">
+    <h1 style="margin:0"><img class="logo" src="img-logo_white.svg" alt="My Welli House"></h1>
+    <span class="rule" aria-hidden="true"></span>
+    <div class="hookwrap"><p class="hook" id="hook">The holiday list, half done for you</p><p class="sub" id="sub"></p></div>
+    <div class="note"><p class="sig">With love, Paola</p></div>
+  </div>
+</header>
+<nav class="cats" aria-label="Shop by category"><div class="in"><a href="#outfits">Outfits</a><a href="#gifts">Gifts</a><a href="#christmas">Christmas</a><a href="#fashion">Holiday fashion</a><a href="#best">Best sellers</a><a href="#splurge">Splurge</a><a href="#budget">Budget</a></div></nav>
+
+<div class="price"><div class="in"><span class="lbl">Shop by price</span><button type="button" data-r="all" aria-pressed="true">All</button><button type="button" data-r="0-25">Under $25</button><button type="button" data-r="0-50">Under $50</button><button type="button" data-r="0-100">Under $100</button><button type="button" data-r="100-99999">$100+</button></div></div>
+<main id="shop"></main>
+
+<footer class="tex">
+  <div class="in">
+    <img src="img-logo_white.svg" alt="My Welli House">
+    <p>As an Amazon Associate I earn from qualifying purchases. Every link goes to Amazon.</p>
+  </div>
+</footer>
+
+<script>
+const LIST='https://www.amazon.com/shop/mywellihousedecor/list/3OCYIZ29Z1T15';
+const LOOKS=[
+ {img:'O01',occ:'Holiday lunch with friends',scn:'A blazer over stripes makes plain jeans feel dressed up.',t:'Striped turtleneck, olive blazer, light jeans',pins:[[36,40,'Striped turtleneck',null],[72,24,'Olive herringbone blazer',null],[58,27,'Triple C-hoop earrings','B0H63F6HGS'],[68,62,'Light-wash straight jeans',null],[36,80,'Pointed block-heel boots',null]]},
+ {img:'O03',occ:'Family holiday dinner',scn:'A soft cardigan and burgundy trousers, cozy but still dressed up.',t:'Taupe cardigan, burgundy trousers, plaid scarf',pins:[[28,24,'Chunky knit cardigan',null],[61,22,'Triple C-hoop earrings','B0H63F6HGS'],[60,50,'Burgundy wide-leg trousers',null],[24,64,'Plaid blanket scarf',null],[76,70,'Pointed block-heel boots',null]]},
+ {img:'O04',occ:'Holiday shopping day',scn:'Long coat, jeans and a phone bag, hands free all day.',t:'Long black coat, stripes, light jeans',pins:[[18,62,'Long double-breasted coat',null],[47,16,'Striped turtleneck',null],[56,25,'Gold knot earrings',null],[36,48,'Phone crossbody bag',null],[44,72,'Light-wash straight jeans',null],[82,70,'Pointed block-heel boots',null]]}
+];
+const S=[
+ {id:"gifts",title:"Gifts for Her",band:"oxblood",list:"1FAQDWPHE7NKB",persona:"Shopping for your mom, sister or best friend? Start here",items:[["B0DY1WSW83","Summer Fridays","Jet Lag Essentials Mini Set",[]],["B0G4XSW2ND","LANEIGE","Bouncy and Firm Sleeping Mask",[]],["B0FH8ZYLJL","GIVCHO","18K Gold Plated Bangle Set",[]],["B0HCNW2VZJ","Ekouaer","Long Sleeve Jogger Pajama Set",[]],["B0DHRN56F5","L'AGRATY","Faux Rabbit Fur Throw",[]],["B0DM6TWRSS","Rosaura","Preserved Flower Bouquet",[]],["B0F19YY96Z","Summer Fridays","Jet Lag Hydrating Eye Patches",[]],["B0H6PJZS29","GIVCHO","Silver Stackable Bangle Set",[]]]},
+ {id:"teen",title:"Teen Girl Gifts",band:"olive",list:"R0HY7HBQSOZI",persona:"For the mom with a teenager who's hard to impress",items:[["B0CQVWT2NH","HydroJug","Traveler 40 oz Bottle",[]],["B0GT1SC4KQ","Moroccanoil","Mini Must-Haves Set",[]],["B0HDP2NX9R","YOOLIFE","Initial Travel Toiletry Bag",[]],["B0H8KJ1DSS","Summer Fridays","Lip Butter Balm",[]],["B0BRX9MTK6","Sunolga","Flower Claw Clips, 8 Pack",[]],["B0D8KWGK5X","Pajiriona","Makeup Organizer with Drawers",[]],["B08B3NHBJ4","Doboli","Cell Phone Stand",[]],["B0DXKKV1GR","GELLAKTIK","Nail Art Pens, 12 Colors",[]]]},
+ {id:"pjs",title:"Pajamas for the Whole Family",band:"cocoa",list:"JB2EB1FH802",persona:"For the family that does Christmas morning photos in pajamas",items:[["B0FFJS1XQJ","Amazon Essentials","x Sofia Grainge Family Pajamas",[]],["B0F2MHJFZY","Amazon Essentials","Matching Holiday Family Pajamas",[]],["B0D9ZHZ59R","Amazon Essentials","Toddler and Baby Holiday Pajamas",[]],["B0F2NCTLK9","Amazon Essentials","Holiday Family Pajama Set",[]],["B08X8NHFC5","Amazon Essentials","Flannel Button Front Pajama Set",[]],["B08XQYKFG6","Amazon Essentials","Cotton Modal Notch Collar Pajamas",[]],["B0CDVGRCF9","YiNi LuLu","Silk Satin Pajama Set",[]],["B0D459DFKL","EverFoams","Fuzzy Memory Foam Slippers",[]]]},
+ {id:"tory",title:"Tory Burch Holiday Gifts",band:"espresso",list:"3F94417L77UT7",persona:"If she's been hinting at a designer gift, look here",items:[["B0CPQ6WWLC","Tory Burch","Mary Jane Ballet Flats",[]],["B0GGH4SG9M","Tory Burch","Romy Suede Shoulder Bag",[]],["B0C82VNG2C","Tory Burch","Icon Slider Bracelet",[]],["B0DMTYJQ3Y","Tory Burch","Romy Bucket Bag",[]],["B0FFKRHMTP","Tory Burch","Reva Travel Ballet Flats",[]],["B0GSGY9YFF","Tory Burch","Romy Slim Top Handle Bag",[]],["B0CPPQ66DL","Tory Burch","Double T Sport Slides",[]],["B0DZ89KQ6V","Tory Burch","Mini Miller Jelly Sandals",[]]]},
+ {id:"mck",title:"MacKenzie-Childs Favorites",band:"moss",list:"1DA0YCV770CFE",persona:"If you collect pieces that make the house feel like Christmas",items:[["B0BZ7K78H1","MacKenzie-Childs","Courtly Check My Mug",[]],["B0F5JR7XX5","MacKenzie-Childs","Wooden Nutcracker Figurine",[]],["B0H7P1MSND","MacKenzie-Childs","Broadmoor House Glass Ornament",[]],["B0CC7XQB4C","MacKenzie-Childs","Musical Snow Globe",[]],["B0FXWZM4KL","MacKenzie-Childs","Bee Toile Salt and Pepper",[]],["B0F4ZHK5W6","MacKenzie-Childs","Wood Tabletop Trees, Set of 2",[]],["B009AWRRK0","MacKenzie-Childs","Courtly Check Ribbon",[]],["B0H7M94MG8","MacKenzie-Childs","Courtly Check Tree Trinket Tray",[]]]},
+ {id:"christmas",title:"Christmas Decor Must-Haves",band:"oxblood",list:"3QKB5KHK8QMO4",persona:"Decorating in red and gold this year? Start with these",items:[["B0FHNGYC3L","Roowest","Red Velvet Christmas Ball Clusters",[]],["B0CBV8SY3G","Starry Dynamo","Burgundy Ruffled Velvet Tree Skirt",[]],["B0FBQTQ1M5","Otoolling","Vintage Gold Cow Bell Garland",[]],["B0GWR9FX3V","Blosssound","15 in Gold Nutcracker",[]],["B0G29TJBCV","HyeFlora","Burgundy Artificial Roses",[]],["B08MLGXSPH","NUPTIO","Gold Vintage Candlestick Holders",[]],["B09MM7GY3G","Micomon","Red Crushed Velvet Ribbon",[]],["B0G4QTCKPW","Kakanuo","Gold Cordless Table Lamp",[]]]},
+ {id:"table",title:"Christmas Table Decor",band:"olive",list:"2BYHBNXY3A8CJ",persona:"If Christmas dinner is at your house this year",items:[["B0H9RYQKV5","Milimot","Red Velvet Table Runner",[]],["B0BV6Y5LTK","NUPTIO","Gold Candlestick Holders",[]],["B0DB5M7642","MAONAME","Red Charger Plates, Set of 12",[]],["B0H3NJJPYR","Breling","Velvet Scalloped Placemats",[]],["B0CJSJYB2M","W&S Classics","French Round Dinner Plates",[]],["B09BBKTXP8","Physkoa","Crystal Red Wine Glasses",[]],["B0F6XKMCZF","Gandeer","Cedar Round Placemats",[]],["B002TL7R3G","Nearly Natural","Christmas Candelabrum Centerpiece",[]]]},
+ {id:"wrap",title:"Gift Wrapping Essentials",band:"cocoa",list:"1OQ1VYHW7RKNS",persona:"If you love how a wrapped gift looks under the tree",items:[["B0HCNHX8J5","woric","Pearly Gold Wrapping Paper",[]],["B0FMRWZQNP","woric","Burgundy Velvet Ribbon",[]],["B08BJ1QQ3J","DIYANA IMPEX","Gold Vintage Jingle Bells",[]],["B0BV64SJ47","RUSPEPA","Chocolate Brown Kraft Paper",[]],["B0FM83ZW17","JarThenaAMCS","Christmas Gift Tags, 60 Pack",[]],["B0D83BP6CF","GDFPLXW","Gold Desk Scissors",[]],["B0H6PDZ625","Vitalizart","Merry Christmas Velvet Ribbon",[]],["B07K818BBJ","ZOBER","Wrapping Paper Storage",[]]]},
+ {id:"fashion",title:"Holiday Fashion",band:"oxblood",list:"ZI9YAJ9F3LF4",persona:"Got a holiday party on the calendar? Start here",items:[["B0BGLG8WSN","Sexyasasii","Velvet Glitter Wrap Dress",[]],["B0FDKXT8VJ","BTFBM","Long Sleeve Maxi Dress",[]],["B0H98PK3DN","OWIN","Sparkly Mesh Mini Dress",[]],["B0H6P4N5V5","ZESICA","Floral Cocktail Mini Dress",[]],["B0H35H3MCZ","ANRABESS","Midi Sweater Dress",[]],["B07FR8L522","PRETTYGARDEN","Crewneck Long Sleeve Dress",[]],["B0D6GB6L8G","OFEEFAN","Mock Neck Party Dress",[]],["B09TB6D65F","Wenrine","Mesh Square Neck Mini Dress",[]]]},
+ {id:"thanks",title:"Thanksgiving Outfit Ideas",band:"moss",list:"1SRDF54TCA5K9",persona:"Not sure what to wear on Thanksgiving? Copy these",items:[["B0FH6SPMZ6","Saodimallsu","Midi Sweater Dress",[]],["B0GY2B67G9","Madewell","Cielo Suede Booties",[]],["B0GP5CHWNR","Splendid","Sandra Fringe Jacket",[]],["B0GWHBGCFH","MOON RIVER","Rounded Hem Cardigan",[]],["B0GNCZ9W7S","DAZE","Villa Barrel Pants",[]],["B0H5KSNRPW","SOLY HUX","Satin Lace Maxi Skirt",[]],["B0F7K6GN6G","Coutgo","Pointed Toe Knee High Boots",[]],["B07VFNL572","FURTALK","Oversized Plaid Tassel Scarf",[]]]},
+ {id:"holiday",title:"Holiday Favorites",band:"olive",list:"1VE2PGG428MXN",persona:"Gifts she'd love but would never buy for herself",items:[["B0FNWRJQFX","INIA","GLOW 4D Red Light Therapy Mask",[]],["B0CDVGRCF9","YiNi LuLu","Silk Satin Pajama Set",[]],["B0DDZ87H4P","Shark","SpeedStyle Pro Hair Dryer",[]],["B0H7SL663S","Cicy Bell","Oversized Faux Suede Jacket",[]],["B07VFNL572","FURTALK","Oversized Plaid Tassel Scarf",[]],["B0CQ27RSK6","CNGLASS","Double Walled Glass Coffee Mugs",[]],["B0FZQKLMT7","Stelle","Boxy Cropped Cotton Tee",[]]]},
+ {id:"shopbop",title:"Shopbop Amazon Favorites",band:"espresso",list:"140WE68XGVG3N",persona:"Love designer labels? Now you can shop them on Amazon",items:[["B0G7K6SBNW","UGG","Tasman II Slipper",[]],["B0GKXBBPMM","Favorite Daughter","The Cameron Coat",[]],["B0BT282BHY","Tory Burch","Icon Slider Bracelet",[]],["B0GLP6CH7H","LE BOP","Toby Trench Coat",[]],["B0GZ9F728D","Madewell","Greta Low Cut Flats",[]],["B0G49LGP5S","Levi's","501 90s Lightweight Jeans",[]],["B0D7PGQ8D5","English Factory","Check Cardigan",[]],["B0GVBPG1F8","ANINE BING","Leo Canvas Tote",[]]]},
+ {id:"best",title:"Best sellers this month",band:"cocoa",list:"",persona:"What my followers bought most this month, all in one place",items:[["B0FR4DHCNF","Simplee","Boho Floral Long Sleeve Maxi Dress",['best']],["B0GWDFDY37","BTFBM","Long Sleeve Cocktail Dress",['best']],["B0GVPWGM6W","PRETTYGARDEN","Long Sleeve Bodycon Maxi Dress",['best']],["B0D7C7RXYL","ANRABESS","Striped Sweater Skirt Set",['best']],["B0H6YTNMV3","Trendy Queen","Oversized Long Crew Neck Sweater",['best']],["B0DFM2PHFX","LYERSE","7 ft Artificial Olive Tree",['best']],["B0F2613VHZ","Tasttin","Self Adhesive Appliance Sliders",['best']],["B0F9SW7V12","Trendy Queen","Two Piece Fall Set",['best']],["B0H1BS4LMZ","Prinbara","Long Sleeve Mesh Formal Dress",['best']],["B0DK6KKT97","PRETTYGARDEN","Pleated Knit Tank Dress",['best']]]},
+ {id:"sweaters",title:"Sweaters I'd live in all winter",band:"olive",list:"2H8GW1OOKJUVU",persona:"If you live in sweaters from November to March",items:[["B0H6DCTLBZ","Saodimallsu","Argyle Collared V Neck Sweater",[]],["B0H7679MCN","Aelfric Eden","Oversized Polo V Neck Sweater",[]],["B0H4L9R22H","ZESICA","Oversized Turtleneck Sweater",[]],["B0H4QXGMW6","ANRABESS","Cropped Polo Collared Sweater",[]],["B0C7MJKR9L","Langwyqu","Cable Knit Turtleneck Sweater",[]],["B0D4LZLM8M","Astylish","Hooded Knit Cardigan",[]],["B0D8VH888X","ANRABESS","Lightweight Crewneck Sweater",[]],["B0GJPCMXHV","MONORA","Short Sleeve Pullover Sweater",[]]]},
+ {id:"denim",title:"Denim I'd wear on repeat",band:"moss",list:"2L6J8RO5HRVOQ",persona:"If denim is your uniform, here's how to wear it now",items:[["B0D3JHX9KM","Levi's","Ribcage Straight Full Length Jeans",[]],["B0FF5DKCD2","Amazon Essentials","Relaxed Denim Bomber Jacket",[]],["B082LNS59Z","Wrangler","Denim Snap Dress",[]],["B0H2DMD4TS","KDF","Belted Denim Mini Dress",[]],["B0F9KVLMLY","POLIRO","Western Denim Babydoll Dress",[]],["B0HCYYWMFY","KDF","Denim Babydoll Tank Dress",[]],["B0H13DK3MF","Levi's","Ribcage Straight Ankle Jeans",[]]]},
+ {id:"splurge",title:"Worth every penny",band:"oxblood",list:"",persona:"If it's the one big gift this year, make it count",items:[["B0GS3DJDDP","Electactic","Espresso Machine with Grinder",[]],["B0GFBBH4WK","Tory Burch","Kira Turn-Lock Shoulder Bag",[]],["B003OXNBYC","KitchenAid","Classic 4.5 Quart Stand Mixer",[]],["B0GKXBBPMM","Favorite Daughter","The Cameron Coat",[]],["B0F373Y2SD","Neretva","Stainless Steel Espresso Machine",[]],["B0GS4QZC48","PAIGE","Clementine Corduroy Dress",[]],["B0GP5CHWNR","Splendid","Sandra Fringe Jacket",[]],["B0DFM2PHFX","LYERSE","7 ft Artificial Olive Tree",[]]]},
+ {id:"budget",title:"Budget friendly",band:"moss",list:"",persona:"Stocking stuffers and small gifts for everyone on your list",items:[["B0H9RYQKV5","Milimot","Red Velvet Table Runner",['budget']],["B0FH8ZYLJL","GIVCHO","18K Gold Plated Bangle Set",['budget']],["B08BJ1QQ3J","DIYANA IMPEX","Gold Vintage Jingle Bells",['budget']],["B07VFNL572","FURTALK","Oversized Plaid Tassel Scarf",['budget']],["B0H5V33CLM","Fullhawl","Burgundy Paper Christmas Trees",['budget']],["B0BRX9MTK6","Sunolga","Flower Claw Clips, 8 Pack",['budget']],["B0H6PDZ625","Vitalizart","Merry Christmas Velvet Ribbon",['budget']],["B0B51C2R36","Trendy Queen","Thermal Turtleneck Top",['budget']],["B0BWJRJYS7","Marycele","Candle Warmer Lamp",['budget']],["B0DBSDSJHH","PAVOI","14K Gold Plated Bangle",['budget']]]}
+];
+const STK={"gifts": "SEE THE GIFT LIST", "teen": "SEE ALL THE IDEAS", "pjs": "SHOP FAMILY PAJAMAS", "tory": "SEE EVERY PICK", "mck": "SEE MY FAVORITES", "christmas": "SHOP THE DECOR", "table": "SHOP THE TABLE", "wrap": "SHOP THE WRAP", "fashion": "OPEN THE LIST", "thanks": "SHOP THESE LOOKS", "holiday": "OPEN THE LIST", "shopbop": "SEE WHAT I PICKED", "sweaters": "SHOP THE SWEATERS", "denim": "FIND YOUR PAIR"};
+const OVL={"gifts": "Her gift, handled", "teen": "The teen gift, figured out", "pjs": "The Christmas morning photo", "tory": "The gift she'll know instantly", "christmas": "Red velvet and gold. That's it.", "table": "When everyone sits down to this", "wrap": "Wrapping night, sorted", "fashion": "Walking into the party in this", "thanks": "Thanksgiving outfit, decided", "sweaters": "Every cold morning, covered", "denim": "The jeans question, answered", "splurge": "The one worth saving for"};
+const B={best:['Bestseller',''],budget:['Budget friendly','moss'],own:['I own this','olive'],bought:['I bought this month','ox']};
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const STAR='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l2.6 7.9H23l-6.8 4.9 2.6 8-6.8-5-6.8 5 2.6-8L1 9.4h8.4z"/></svg>';
+const lookHTML=`<section id="outfits"><div class="band tex olive"><div class="in"><h2 id="h-outfits">Outfits for my holiday <em>Plans</em></h2><p class="persona" id="p-outfits">Three easy outfits for everything on your holiday calendar</p></div></div>
+ <div class="in"><div class="looks">${LOOKS.map((L,i)=>`<div class="look"><div class="fl"><img src="outfits-${L.img}.webp" alt="${esc(L.t)} flat lay" loading="lazy">
+ </div><div class="lk"><span class="occ" id="occ-${i}">${esc(L.occ)}</span><span class="scn" id="scn-${i}">${esc(L.scn)}</span><a class="stk" href="${LIST}" target="_blank" rel="noopener sponsored"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 13.4a1 1 0 0 1 0-1.4l3.4-3.4a3 3 0 1 1 4.2 4.2l-1.8 1.8a1 1 0 1 1-1.4-1.4l1.8-1.8a1 1 0 1 0-1.4-1.4L12 13.4a1 1 0 0 1-1.4 0zm2.8-2.8a1 1 0 0 1 0 1.4L10 15.4a3 3 0 1 1-4.2-4.2l1.8-1.8a1 1 0 1 1 1.4 1.4l-1.8 1.8a1 1 0 1 0 1.4 1.4l3.4-3.4a1 1 0 0 1 1.4 0z"/></svg><span>SHOP THESE OUTFITS</span></a></div></div>`).join('')}</div></div></section>`;
+const CUT=new Set(["B002TL7R3G", "B003OXNBYC", "B009AWRRK0", "B00HS6XQ2S", "B07FR8L522", "B07H9J6GSK", "B07K818BBJ", "B07VFNL572", "B082LNS59Z", "B08B3NHBJ4", "B08BJ1QQ3J", "B08MLGXSPH", "B08X8NHFC5", "B08XQYKFG6", "B09MM7GY3G", "B09TB6D65F", "B0B51C2R36", "B0BGLG8WSN", "B0BT282BHY", "B0BV64SJ47", "B0BZ7K78H1", "B0C7MJKR9L", "B0C82VNG2C", "B0CC7XQB4C", "B0CDVGRCF9", "B0CJSJYB2M", "B0CPPQ66DL", "B0CPQ6WWLC", "B0CQ27RSK6", "B0CQVWT2NH", "B0D3JHX9KM", "B0D3YH7NL4", "B0D459DFKL", "B0D4LZLM8M", "B0D6GB6L8G", "B0D7C7RXYL", "B0D7PGQ8D5", "B0D83BP6CF", "B0D8KWGK5X", "B0D8VH888X", "B0D9ZHZ59R", "B0DB5M7642", "B0DBSDSJHH", "B0DDZ87H4P", "B0DFM2PHFX", "B0DJ8PKG8S", "B0DK6KKT97", "B0DM6TWRSS", "B0DMTYJQ3Y", "B0DXKKV1GR", "B0DY1WSW83", "B0DZ89KQ6V", "B0F19YY96Z", "B0F2613VHZ", "B0F2MHJFZY", "B0F2NCTLK9", "B0F373Y2SD", "B0F4ZHK5W6", "B0F5JR7XX5", "B0F6XKMCZF", "B0F7K6GN6G", "B0F7XQY6BC", "B0F8VFFFT8", "B0F9KVLMLY", "B0F9SW7V12", "B0FD3G77T5", "B0FDKXT8VJ", "B0FF5CD8G4", "B0FF5DKCD2", "B0FFJS1XQJ", "B0FFKRHMTP", "B0FH6SPMZ6", "B0FH8ZYLJL", "B0FM3K6HD3", "B0FM83ZW17", "B0FMRWZQNP", "B0FNWRJQFX", "B0FR4DHCNF", "B0FWJBND1G", "B0FXWZM4KL", "B0FZQKLMT7", "B0G29TJBCV", "B0G49LGP5S", "B0G4QTCKPW", "B0G4XSW2ND", "B0G7K6SBNW", "B0GFBBH4WK", "B0GGH4SG9M", "B0GGH8D34L", "B0GJPCMXHV", "B0GKXBBPMM", "B0GLP6CH7H", "B0GNCZ9W7S", "B0GP5CHWNR", "B0GPLQS2V2", "B0GS3DJDDP", "B0GS4QZC48", "B0GSGY9YFF", "B0GT1SC4KQ", "B0GVBPG1F8", "B0GVPWGM6W", "B0GWDFDY37", "B0GWHBGCFH", "B0GWR9FX3V", "B0GY2B67G9", "B0GYW47S2H", "B0GZ9F728D", "B0H13DK3MF", "B0H1BS4LMZ", "B0H1WKB9WR", "B0H25W78CT", "B0H2DMD4TS", "B0H35H3MCZ", "B0H35RJ28X", "B0H4L9R22H", "B0H4QXGMW6", "B0H5KSNRPW", "B0H6DCTLBZ", "B0H6P4N5V5", "B0H6PDZ625", "B0H6PJZS29", "B0H6YTNMV3", "B0H7679MCN", "B0H7M94MG8", "B0H7P1MSND", "B0H7SL663S", "B0H85XQ89T", "B0H8KJ1DSS", "B0H98PK3DN", "B0HCNHX8J5", "B0HCNW2VZJ", "B0HCYYWMFY", "B0HDP2NX9R"]);
+const card=([a,b,n,bs],ov)=>`<a class="p" href="https://www.amazon.com/dp/${a}" target="_blank" rel="noopener sponsored"><div class="ph">${ov?`<span class="ovl">${esc(ov)}</span>`:''}<img src="p-${a}.webp" alt="${esc(b+' '+n)}" loading="lazy">${bs[0]?`<span class="badge ${B[bs[0]][1]}">${B[bs[0]][0]}</span>`:''}</div><span class="brand">${esc(b)}</span><span class="nm">${esc(n)}</span><span class="shop">Shop on Amazon</span></a>`;
+const TI={"Gifts for Her": "Her", "Teen Girl Gifts": "Gifts", "Pajamas for the Whole Family": "Whole Family", "Tory Burch Holiday Gifts": "Holiday Gifts", "MacKenzie-Childs Favorites": "Favorites", "Christmas Decor Must-Haves": "Must Haves", "Christmas Table Decor": "Table Decor", "Gift Wrapping Essentials": "Essentials", "Holiday Fashion": "Fashion", "Thanksgiving Outfit Ideas": "Outfit Ideas", "Holiday Favorites": "Favorites", "Shopbop Amazon Favorites": "Amazon Favorites", "Best sellers this month": "this month", "Sweaters I'd live in all winter": "I'd live in all winter", "Denim I'd wear on repeat": "I'd wear on repeat", "Splurge, but so worth it": "but so worth it", "Budget friendly": "friendly"};
+const TT=t=>{const i=t.lastIndexOf(" ");if(i<0)return esc(t);const w=t.slice(i+1);return esc(t.slice(0,i+1))+"<em>"+esc(w.charAt(0).toUpperCase()+w.slice(1))+"</em>"};
+const SEC=s=>`<section id="${s.id}"><div class="band tex ${s.band}"><div class="in"><h2 id="h-${s.id}">${TT(s.title)}</h2><p class="persona" id="p-${s.id}">${esc(s.persona||'')}</p></div></div>
+ <div class="row"><div class="in"><button class="arw prev" type="button" aria-label="Scroll ${esc(s.title)} left">&#8249;</button><div class="track">${s.items.map((it,k)=>card(it,k===0?OVL[s.id]:'')).join('')}</div><button class="arw next" type="button" aria-label="Scroll ${esc(s.title)} right">&#8250;</button></div></div>
+ ${s.list?`<div class="more"><a class="stk" href="https://www.amazon.com/shop/mywellihousedecor/list/${s.list}" target="_blank" rel="noopener sponsored"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 13.4a1 1 0 0 1 0-1.4l3.4-3.4a3 3 0 1 1 4.2 4.2l-1.8 1.8a1 1 0 1 1-1.4-1.4l1.8-1.8a1 1 0 1 0-1.4-1.4L12 13.4a1 1 0 0 1-1.4 0zm2.8-2.8a1 1 0 0 1 0 1.4L10 15.4a3 3 0 1 1-4.2-4.2l1.8-1.8a1 1 0 1 1 1.4 1.4l-1.8 1.8a1 1 0 1 0 1.4 1.4l3.4-3.4a1 1 0 0 1 1.4 0z"/></svg><span>${STK[s.id]||'SHOP THE FULL LIST'}</span></a></div>`:''}</section>`;
+const STL=`<section id="stl"><div class="band tex oxblood"><div class="in"><h2 id="h-stl">Shop the <em>Look</em></h2><p class="persona" id="p-stl">Four holiday outfits, every piece already found.</p></div></div><div class="row"><div class="in"><button class="arw prev" type="button" aria-label="Scroll looks left">&#8249;</button><div class="track stl-track"><div class="stl-card"><div class="ph2"><img src="looks-L1.webp" alt="Burgundy velvet party dress with gold heels" loading="lazy"></div><div class="ths"><a class="th" href="https://www.amazon.com/dp/B0BGLG8WSN" target="_blank" rel="noopener sponsored"><img src="looks-t_B0BGLG8WSN.webp" alt="Velvet Wrap Mini Dress" loading="lazy"></a><a class="th" href="https://www.amazon.com/dp/B0DPHLM5HD" target="_blank" rel="noopener sponsored"><img src="looks-t_B0DPHLM5HD.webp" alt="Gold Strappy Heels" loading="lazy"></a><a class="th" href="https://www.amazon.com/dp/B0FQWT7SLR" target="_blank" rel="noopener sponsored"><img src="looks-t_B0FQWT7SLR.webp" alt="Gold and Pearl Bracelet" loading="lazy"></a></div><div class="lk"><a class="stk" href="https://www.amazon.com/shop/mywellihousedecor/list/ZI9YAJ9F3LF4" target="_blank" rel="noopener sponsored"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 13.4a1 1 0 0 1 0-1.4l3.4-3.4a3 3 0 1 1 4.2 4.2l-1.8 1.8a1 1 0 1 1-1.4-1.4l1.8-1.8a1 1 0 1 0-1.4-1.4L12 13.4a1 1 0 0 1-1.4 0zm2.8-2.8a1 1 0 0 1 0 1.4L10 15.4a3 3 0 1 1-4.2-4.2l1.8-1.8a1 1 0 1 1 1.4 1.4l-1.8 1.8a1 1 0 1 0 1.4 1.4l3.4-3.4a1 1 0 0 1 1.4 0z"/></svg><span>SHOP THE FULL LIST</span></a></div></div><div class="stl-card"><div class="ph2"><img src="looks-L2.webp" alt="Black cardigan with light jeans and burgundy flats" loading="lazy"></div><div class="ths"><a class="th" href="https://www.amazon.com/dp/B0H45CGK9M" target="_blank" rel="noopener sponsored"><img src="looks-t_B0H45CGK9M.webp" alt="Gold Button Cardigan" loading="lazy"></a><a class="th" href="https://www.amazon.com/dp/B0D3JHX9KM" target="_blank" rel="noopener sponsored"><img src="looks-t_B0D3JHX9KM.webp" alt="Light Straight Jeans" loading="lazy"></a><a class="th" href="https://www.amazon.com/dp/B0BW51K769" target="_blank" rel="noopener sponsored"><img src="looks-t_B0BW51K769.webp" alt="Burgundy Mary Jane Flats" loading="lazy"></a></div><div class="lk"><a class="stk" href="https://www.amazon.com/shop/mywellihousedecor/list/2H8GW1OOKJUVU" target="_blank" rel="noopener sponsored"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 13.4a1 1 0 0 1 0-1.4l3.4-3.4a3 3 0 1 1 4.2 4.2l-1.8 1.8a1 1 0 1 1-1.4-1.4l1.8-1.8a1 1 0 1 0-1.4-1.4L12 13.4a1 1 0 0 1-1.4 0zm2.8-2.8a1 1 0 0 1 0 1.4L10 15.4a3 3 0 1 1-4.2-4.2l1.8-1.8a1 1 0 1 1 1.4 1.4l-1.8 1.8a1 1 0 1 0 1.4 1.4l3.4-3.4a1 1 0 0 1 1.4 0z"/></svg><span>SHOP THE FULL LIST</span></a></div></div><div class="stl-card"><div class="ph2"><img src="looks-L3.webp" alt="Cream cable sweater with dark jeans and suede slippers" loading="lazy"></div><div class="ths"><a class="th" href="https://www.amazon.com/dp/B0H7679MCN" target="_blank" rel="noopener sponsored"><img src="looks-t_B0H7679MCN.webp" alt="Cable Knit Collared Sweater" loading="lazy"></a><a class="th" href="https://www.amazon.com/dp/B0FW7TJ8SM" target="_blank" rel="noopener sponsored"><img src="looks-t_B0FW7TJ8SM.webp" alt="Dark Straight Jeans" loading="lazy"></a><a class="th" href="https://www.amazon.com/dp/B0DPJH8ZRQ" target="_blank" rel="noopener sponsored"><img src="looks-t_B0DPJH8ZRQ.webp" alt="Tasman Slipper, Chestnut" loading="lazy"></a></div><div class="lk"><a class="stk" href="https://www.amazon.com/shop/mywellihousedecor/list/2H8GW1OOKJUVU" target="_blank" rel="noopener sponsored"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 13.4a1 1 0 0 1 0-1.4l3.4-3.4a3 3 0 1 1 4.2 4.2l-1.8 1.8a1 1 0 1 1-1.4-1.4l1.8-1.8a1 1 0 1 0-1.4-1.4L12 13.4a1 1 0 0 1-1.4 0zm2.8-2.8a1 1 0 0 1 0 1.4L10 15.4a3 3 0 1 1-4.2-4.2l1.8-1.8a1 1 0 1 1 1.4 1.4l-1.8 1.8a1 1 0 1 0 1.4 1.4l3.4-3.4a1 1 0 0 1 1.4 0z"/></svg><span>SHOP THE FULL LIST</span></a></div></div><div class="stl-card"><div class="ph2"><img src="looks-L4.webp" alt="Camel trench over a Fair Isle sweater with light jeans" loading="lazy"></div><div class="ths"><a class="th" href="https://www.amazon.com/dp/B0GLP6CH7H" target="_blank" rel="noopener sponsored"><img src="looks-t_B0GLP6CH7H.webp" alt="Camel Trench Coat" loading="lazy"></a><a class="th" href="https://www.amazon.com/dp/B0H7YV3RJM" target="_blank" rel="noopener sponsored"><img src="looks-t_B0H7YV3RJM.webp" alt="Fair Isle Sweater" loading="lazy"></a><a class="th" href="https://www.amazon.com/dp/B0FBKMPKL9" target="_blank" rel="noopener sponsored"><img src="looks-t_B0FBKMPKL9.webp" alt="Light Straight Jeans" loading="lazy"></a><a class="th" href="https://www.amazon.com/dp/B0G7K6SBNW" target="_blank" rel="noopener sponsored"><img src="looks-t_B0G7K6SBNW.webp" alt="Tasman Slipper, Sand" loading="lazy"></a></div><div class="lk"><a class="stk" href="https://www.amazon.com/shop/mywellihousedecor/list/140WE68XGVG3N" target="_blank" rel="noopener sponsored"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 13.4a1 1 0 0 1 0-1.4l3.4-3.4a3 3 0 1 1 4.2 4.2l-1.8 1.8a1 1 0 1 1-1.4-1.4l1.8-1.8a1 1 0 1 0-1.4-1.4L12 13.4a1 1 0 0 1-1.4 0zm2.8-2.8a1 1 0 0 1 0 1.4L10 15.4a3 3 0 1 1-4.2-4.2l1.8-1.8a1 1 0 1 1 1.4 1.4l-1.8 1.8a1 1 0 1 0 1.4 1.4l3.4-3.4a1 1 0 0 1 1.4 0z"/></svg><span>SHOP THE FULL LIST</span></a></div></div></div><button class="arw next" type="button" aria-label="Scroll looks right">&#8250;</button></div></div></section>`;
+/* ===== LAYOUT VARIANT: 'full' (all rows) or 'edit' (condensed, 9 blocks). ?layout=edit|full forces one.
+   SPLIT=false shows everyone 'full' until Paola approves the edit copy; set SPLIT=true to run a 50/50 test. ===== */
+const SPLIT=false;
+let LAYOUT='full';
+try{const q=new URLSearchParams(location.search).get('layout');
+ if(q==='edit'||q==='full'){LAYOUT=q;}
+ else if(SPLIT){let v=localStorage.getItem('mwh_layout');if(v!=='edit'&&v!=='full'){v=Math.random()<.5?'edit':'full';localStorage.setItem('mwh_layout',v);}LAYOUT=v;}}catch(e){}
+document.documentElement.setAttribute('data-variant',LAYOUT);
+const EDIT=LAYOUT==='edit';
+if(EDIT){
+ const G={};S.forEach(x=>G[x.id]=x);
+ const top8=(ids)=>{const all=[],seen={};ids.forEach(i=>(G[i]?G[i].items:[]).forEach(it=>{if(!seen[it[0]]){seen[it[0]]=1;all.push(it);}}));
+   return all.map((it,k)=>[it,k]).sort((a,b)=>((b[0][3]||[]).includes('best')-(a[0][3]||[]).includes('best'))||(a[1]-b[1])).map(x=>x[0]).slice(0,8);};
+ const mk=(id,title,persona,ids,list)=>({id,title,persona,list,band:'oxblood',items:top8(ids)});
+ const E=[
+  Object.assign({},G.best,{items:top8(['best'])}),
+  mk('gifts','Gifts for Her',G.gifts.persona,['gifts','holiday'],G.gifts.list),
+  mk('dressed','Dressed for the Holidays','What to wear to Thanksgiving and every holiday party',['fashion','thanks'],G.fashion.list),
+  mk('winter','The Winter Uniform','Cozy sweaters and straight jeans you can wear on repeat',['sweaters','denim'],G.sweaters.list),
+  mk('home','Christmas at Home','Red and gold for the tree, the mantel and every room',['christmas','table'],G.christmas.list),
+  Object.assign({},G.pjs,{items:top8(['pjs'])}),
+  Object.assign({},G.mck,{items:top8(['mck'])}),
+  mk('designer','Worth the Splurge','Designer gifts and home splurges worth saving up for',['shopbop','tory','splurge'],G.shopbop.list),
+  mk('everyone','Gifts for Everyone','Teen girl gifts and budget stocking stuffers',['teen','budget'],G.budget.list)
+ ];
+ S.length=0;E.forEach(x=>S.push(x));
+ window.EDIT_WRAP=G.wrap?G.wrap.list:'';
+ document.addEventListener('DOMContentLoaded',()=>{const R={'#fashion':'#dressed','#christmas':'#home','#splurge':'#designer','#budget':'#everyone','#sweaters':'#winter','#denim':'#winter'};document.querySelectorAll('nav.cats a').forEach(x=>{const h=x.getAttribute('href');if(R[h])x.setAttribute('href',R[h]);});});
+}
+const ORDER=EDIT?['best','gifts','dressed','winter','OUTFITS','home','pjs','mck','designer','everyone']:['best','gifts','fashion','thanks','sweaters','denim','OUTFITS','christmas','shopbop','tory','splurge','budget','teen','pjs','holiday','mck','table','wrap'];
+const BYID={};S.forEach(x=>BYID[x.id]=x);
+document.getElementById('shop').innerHTML=STL+ORDER.map(k=>k==='OUTFITS'?lookHTML:(BYID[k]?SEC(BYID[k]):'')).join('')+S.filter(x=>!ORDER.includes(x.id)).map(SEC).join('');
+(()=>{const C=['oxblood','olive','espresso'];document.querySelectorAll('#shop > section > .band').forEach((b,k)=>{b.classList.remove('oxblood','olive','espresso','cocoa','moss');b.classList.add(C[k%3]);});})();
+document.querySelectorAll('#shop section > .band .in > h2').forEach((h,k)=>h.insertAdjacentHTML('beforebegin','<span class="no">No. '+String(k+1).padStart(2,'0')+'</span>'));
+// Tracking: the ad link carries its own tag (?t=xxxx-20); every Amazon link on the page uses it
+(()=>{let t='';try{t=new URLSearchParams(location.search).get('t')||'';}catch(e){}
+ if(!/^[a-z0-9-]{3,40}-20$/i.test(t))t='mywellihoused-20';
+ document.querySelectorAll('a[href^="https://www.amazon.com/"]').forEach(a=>{const u=new URL(a.href);u.searchParams.set('tag',t);a.href=u.toString();});})();
+// Arrows: scroll one screen of cards; dim at the ends; hide when nothing overflows
+document.querySelectorAll('.row').forEach(r=>{const t=r.querySelector('.track'),pv=r.querySelector('.prev'),nx=r.querySelector('.next');
+ const upd=()=>{const max=t.scrollWidth-t.clientWidth;const none=max<4;pv.hidden=nx.hidden=none;pv.disabled=t.scrollLeft<4;nx.disabled=t.scrollLeft>max-4;};
+ pv.onclick=()=>t.scrollBy({left:-t.clientWidth*.85});nx.onclick=()=>t.scrollBy({left:t.clientWidth*.85});
+ t.addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);addEventListener('load',upd);upd();});
+// Stars: hover on desktop, tap on phones; one open at a time
+let open=null;
+const close=()=>{if(open){open.d.setAttribute('aria-expanded','false');open.t.hidden=true;open=null;}};
+const show=d=>{if(open&&open.d===d)return;close();const t=document.getElementById('tip-'+d.dataset.k);d.setAttribute('aria-expanded','true');t.hidden=false;open={d,t};};
+document.querySelectorAll('.star').forEach(d=>{d.addEventListener('click',e=>{e.stopPropagation();(open&&open.d===d)?close():show(d);});d.addEventListener('mouseenter',()=>{if(matchMedia('(hover:hover)').matches)show(d);});});
+document.querySelectorAll('.tip').forEach(t=>t.addEventListener('click',e=>e.stopPropagation()));
+document.addEventListener('click',close);document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
+</script>
+
+<script>/* EDITORIAL v2: breaks, feed, price, reveal, sticky, one-line titles */
+(function(){
+var PR={"B0FZQKLMT7": 19.99, "B0GT1SC4KQ": 15.0, "B0GLP6CH7H": 268.0, "B0G7K6SBNW": 129.95, "B0CDVGRCF9": 29.99, "B0GWHBGCFH": 96.0, "B0GGH4SG9M": 395.0, "B0GKXBBPMM": 398.0, "B08XQYKFG6": 23.4, "B0H5KSNRPW": 36.99, "B0FF5DKCD2": 26.12, "B09TB6D65F": 29.99, "B0HDP2NX9R": 19.99, "B09BBKTXP8": 35.99, "B0CJSJYB2M": 45.99, "B0HCNW2VZJ": 29.99, "B0F2NCTLK9": 15.8, "B0F4ZHK5W6": 79.95, "B08X8NHFC5": 24.4, "B0H5V33CLM": 19.99, "B07VFNL572": 13.99, "B0H4QXGMW6": 23.99, "B0FXWZM4KL": 59.95, "B0H3NJJPYR": 26.99, "B0FMRWZQNP": 8.99, "B0H7679MCN": 52.95, "B009AWRRK0": 79.95, "B0GNCZ9W7S": 118.0, "B0F9KVLMLY": 54.99, "B0DBSDSJHH": 15.45, "B0FFKRHMTP": 225.0, "B0DZ89KQ6V": 125.0, "B0BV6Y5LTK": 54.98, "B07K818BBJ": 24.99, "B0D3YH7NL4": 90.0, "B0F6XKMCZF": 34.99, "B0H13DK3MF": 110.0, "B0F2MHJFZY": 15.8, "B0CC7XQB4C": 74.95, "B0GZ9F728D": 128.0, "B0FDKXT8VJ": 50.99, "B002TL7R3G": 71.17, "B0G4XSW2ND": 36.0, "B0D83BP6CF": 9.99, "B0BV64SJ47": 22.99, "B0H8KJ1DSS": 24.0, "B0DB5M7642": 54.75, "B0H98PK3DN": 37.99, "B0D459DFKL": 25.64, "B0D7PGQ8D5": 120.0, "B0GVBPG1F8": 120.0, "B0D8KWGK5X": 26.99, "B0D9ZHZ59R": 19.9, "B0DXKKV1GR": 8.99, "B0CPQ6WWLC": 325.0, "B0FH6SPMZ6": 45.99, "B0H7M94MG8": 59.95, "B0F7K6GN6G": 74.99, "B0H6P4N5V5": 63.99, "B08BJ1QQ3J": 12.9, "B0BGLG8WSN": 49.99, "B0D3JHX9KM": 50.97, "B0CQVWT2NH": 31.99, "B0DHRN56F5": 35.99, "B0H35H3MCZ": 36.99, "B0F5JR7XX5": 89.95, "B0GSGY9YFF": 295.0, "B0H2DMD4TS": 41.98, "B0H6PDZ625": 14.99, "B0H6PJZS29": 18.99, "B0H4L9R22H": 45.99, "B0DY1WSW83": 34.0, "B0GP5CHWNR": 358.0, "B0BRX9MTK6": 8.31, "B0D6GB6L8G": 39.99, "B0G49LGP5S": 110.0, "B0DM6TWRSS": 33.99, "B0BT282BHY": 100.0, "B0C82VNG2C": 100.0, "B0FH8ZYLJL": 18.99, "B0F19YY96Z": 24.0, "B0F9SW7V12": 32.99, "B0FM83ZW17": 9.99, "B0BZ7K78H1": 49.95, "B0DMTYJQ3Y": 395.0, "B0CPPQ66DL": 200.0, "B0BWJRJYS7": 19.99, "B07FR8L522": 52.99, "B0H6DCTLBZ": 35.99, "B0H7P1MSND": 79.95, "B0GY2B67G9": 218.0, "B08B3NHBJ4": 16.99, "B0HCNHX8J5": 9.99, "B0H9RYQKV5": 13.99, "B0FFJS1XQJ": 28.5, "B082LNS59Z": 60.0, "B0HCYYWMFY": 45.88};
+var BRK={christmas:["img-break2.webp","Make the house feel like Christmas"],home:["img-break2.webp","Make the house feel like Christmas"],winter:["img-break3.webp","Your holiday outfit, already picked out"],wrap:["img-break1.webp","Wrapped, tied, and off your list"],sweaters:["img-break3.webp","Your holiday outfit, already picked out"]};
+Object.keys(BRK).forEach(function(id){var sec=document.getElementById(id);if(!sec)return;var d=document.createElement('div');d.className='brk rv';d.style.backgroundImage='url('+BRK[id][0]+')';d.setAttribute('role','img');d.setAttribute('aria-label',BRK[id][1]);d.innerHTML='<p>'+BRK[id][1]+'</p>';sec.parentNode.insertBefore(d,sec)});
+var FEED=["De5LOnaN2TG","DeItvfMsZ39","Dd-E4sQsjpQ"];
+var f=document.createElement('section');f.className='feed';f.id='feed';
+f.innerHTML='<div class="band tex olive"><div class="in"><h2>Shop my latest <em>Reels</em></h2><p class="persona">Tap one to watch it and get the links</p></div></div><div class="row"><div class="in"><div class="tiles">'+FEED.map(function(c){return '<a class="rv" href="https://www.instagram.com/reel/'+c+'/" target="_blank" rel="noopener"><img src="feed-'+c+'.webp" alt="My Welli House Reel" loading="lazy"></a>'}).join('')+'</div></div></div>';
+if(window.EDIT_WRAP){var w=document.createElement('div');w.className='more-links';w.innerHTML='<a class="stk" href="https://www.amazon.com/shop/mywellihousedecor/list/'+window.EDIT_WRAP+'" target="_blank" rel="noopener sponsored"><span>Gift Wrap Ideas</span></a>';document.getElementById('shop').appendChild(w);}
+document.getElementById('shop').appendChild(f);
+document.querySelectorAll('#shop > section > .band, .feed .band').forEach(function(b){b.classList.add('rv')});
+/* price filter */
+document.querySelectorAll('.track .p').forEach(function(a){var m=(a.getAttribute('href')||'').match(/dp\/([A-Z0-9]{10})/);if(m&&PR[m[1]]!=null)a.dataset.p=PR[m[1]]});
+document.querySelectorAll('.price button').forEach(function(b){b.addEventListener('click',function(){
+ document.querySelectorAll('.price button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+ var r=b.dataset.r,all=r==='all',lo=0,hi=0;if(!all){var q=r.split('-');lo=+q[0];hi=+q[1]}
+ document.querySelectorAll('#shop > section').forEach(function(sec){
+  var cards=sec.querySelectorAll('.track .p'),vis=0;
+  cards.forEach(function(a){var p=a.dataset.p,ok=all||(p!=null&&+p>=lo&&+p<hi);a.classList.toggle('hidep',!ok);if(ok)vis++});
+  sec.classList.toggle('hidep',!all&&(cards.length===0||vis===0));
+ });
+ document.querySelectorAll('.brk').forEach(function(d){d.classList.toggle('hidep',!all)});
+ var t=document.getElementById('shop');window.scrollTo({top:t.getBoundingClientRect().top+scrollY-70,behavior:'smooth'});
+})});
+/* reveal */
+var io='IntersectionObserver' in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'}):null;
+document.querySelectorAll('.rv').forEach(function(el){io?io.observe(el):el.classList.add('on')});
+/* sticky phone bar */
+
+/* one-line titles: shrink only if needed */
+function fitT(){document.querySelectorAll('h2').forEach(function(h){h.style.fontSize='';var w=h.parentElement.clientWidth-8,fs=parseFloat(getComputedStyle(h).fontSize);while(h.scrollWidth>w&&fs>12){fs-=.5;h.style.fontSize=fs+'px'}})}
+addEventListener('load',fitT);addEventListener('resize',fitT);if(document.fonts)document.fonts.ready.then(fitT);fitT();
+})();</script>
+<script>/* keep every subtitle on one line: shrink only if it would overflow */
+(function(){function fit(){document.querySelectorAll('.persona').forEach(function(p){p.style.fontSize='';var w=p.parentElement.clientWidth-8,f=parseFloat(getComputedStyle(p).fontSize);while(p.scrollWidth>w&&f>10){f-=.5;p.style.fontSize=f+'px'}})}
+addEventListener('load',fit);addEventListener('resize',fit);if(document.fonts)document.fonts.ready.then(fit);setTimeout(fit,50)})();</script>
+
+<script>/* ===== MWH SHOP TRACKING (GA4 ecommerce-style). Paste the Measurement ID below to switch it on. ===== */
+(function(){
+var GA_ID=''; /* e.g. 'G-XXXXXXXXXX' */
+var PAGE_VARIANT=document.documentElement.getAttribute('data-variant')||'full';
+window.dataLayer=window.dataLayer||[];
+function gtag(){dataLayer.push(arguments);}
+window.mwhTrack=function(name,params){try{params=params||{};params.page_variant=PAGE_VARIANT;params.transport_type='beacon';if(GA_ID)gtag('event',name,params);if(window.MWH_DEBUG)console.log('[track]',name,params);}catch(e){}};
+var qs=new URLSearchParams(location.search);var tag=qs.get('t')||'';
+var src=tag?'ad':(qs.get('utm_source')||(document.referrer.indexOf('instagram')>-1?'instagram':(document.referrer?'referral':'direct')));
+if(GA_ID){var g=document.createElement('script');g.async=true;g.src='https://www.googletagmanager.com/gtag/js?id='+GA_ID;document.head.appendChild(g);
+ gtag('js',new Date());gtag('config',GA_ID,{page_variant:PAGE_VARIANT,traffic_tag:tag||'mywellihoused-20',traffic_source:src,local_hour:new Date().getHours()});}
+function txt(el,sel){var x=el&&el.querySelector(sel);return x?x.textContent.trim():'';}
+function asin(a){var m=(a.getAttribute('href')||'').match(/dp\/([A-Z0-9]{10})/);return m?m[1]:'';}
+function block(el){var s=el.closest('section');if(!s)return{id:'',name:''};var h=s.querySelector('h2');return{id:s.id,name:h?h.textContent.replace(/\s+/g,' ').trim():s.id};}
+function item(a,i){var b=block(a);var o={item_id:asin(a),item_name:txt(a,'.nm')||(a.querySelector('img')||{}).alt||'',item_brand:txt(a,'.brand'),index:i,item_list_id:b.id,item_list_name:b.name};if(a.dataset.p)o.price=+a.dataset.p;return o;}
+function prods(sec){return [].slice.call(sec.querySelectorAll('.track a.p, .stl-card a.th'));}
+/* block impressions: once per block when half of it is on screen */
+function watch(){if(!('IntersectionObserver' in window))return;var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;io.unobserve(e.target);var s=e.target,b=block(s.querySelector('h2')||s);var ps=prods(s).slice(0,12).map(function(a,i){return item(a,i+1)});mwhTrack('view_item_list',{item_list_id:b.id,item_list_name:b.name,items:ps});});},{threshold:.35});
+ document.querySelectorAll('#shop > section').forEach(function(s){io.observe(s)});}
+/* every click on the page, sorted into store-style events */
+document.addEventListener('click',function(ev){var a=ev.target.closest('a,button');if(!a)return;var b=block(a);
+ if(a.matches('.track a.p, .stl-card a.th')){var row=[].slice.call((a.closest('.track')||a.closest('.stl-card')).querySelectorAll('a.p, a.th'));var it=item(a,row.indexOf(a)+1);var look=a.closest('.stl-card');if(look){it.item_variant=(look.querySelector('.ph2 img')||{}).alt||'';}
+   mwhTrack('select_item',{item_list_id:b.id,item_list_name:b.name,items:[it]});return;}
+ if(a.matches('a.stk')){var look2=a.closest('.stl-card');mwhTrack('select_promotion',{promotion_id:b.id+(look2?'_look'+([].indexOf.call(look2.parentNode.children,look2)+1):''),promotion_name:'Shop the full list',creative_slot:b.name,link_url:a.href});return;}
+ if(a.closest('nav.cats')){mwhTrack('nav_click',{label:a.textContent.trim(),target:a.getAttribute('href')});return;}
+ if(a.closest('.feed')){mwhTrack('reel_click',{link_url:a.href,index:[].indexOf.call(a.parentNode.children,a)+1});return;}
+ if(a.closest('#sticky')){mwhTrack('sticky_click',{label:a.textContent.trim()});return;}
+ if(a.closest('.price')){mwhTrack('price_filter',{range:a.dataset.r});return;}
+ if(a.matches('.arw')){mwhTrack('row_scroll',{item_list_id:b.id,direction:a.classList.contains('next')?'next':'prev'});return;}
+ if(a.href&&a.href.indexOf('amazon.com')>-1){mwhTrack('outbound_amazon',{link_url:a.href,item_list_id:b.id});}
+},true);
+/* scroll depth */
+var marks=[25,50,75,100],hit={};addEventListener('scroll',function(){var h=document.documentElement,p=Math.round((scrollY+innerHeight)/h.scrollHeight*100);marks.forEach(function(m){if(p>=m&&!hit[m]){hit[m]=1;mwhTrack('scroll_depth',{percent:m});}});},{passive:true});
+/* time on page buckets */
+[10,30,60,120].forEach(function(s){setTimeout(function(){if(!document.hidden)mwhTrack('engaged_time',{seconds:s});},s*1000);});
+if(document.readyState==='complete')watch();else addEventListener('load',watch);
+})();</script>
+</body>
+</html>
